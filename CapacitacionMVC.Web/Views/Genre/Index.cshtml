@@ -1,0 +1,42 @@
+﻿@model IEnumerable<CapacitacionMVC.Web.Models.GenreViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm("SearchGenres", "Genre", FormMethod.Get, new { @class = "form-inline" }))
+{
+
+    @Html.TextBox("filter", null, new { @class = "form-control", placeholder = "Ingrese Nombre" })
+    @*<li> @Html.DropDownList("genre_filter", new List<SelectListItem>(), "Filtro generos", new { @class = "form-control" }) </li>*@
+    <input type="submit" name="btn_buscar" class="btn btn-primary" value="Buscar" />
+}
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id }) |
+            @Html.ActionLink("List movies","ListMovies", new {id=item.Id})
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,67 @@
+﻿@model IEnumerable<CapacitacionMVC.Web.Models.MovieViewModel>
+
+@{
+    ViewBag.Title = "Peliculas";
+}
+
+<h2>Peliculas</h2>
+
+@using (Html.BeginForm("SearchMovies", "Movie", FormMethod.Get, new { @class = "form-inline" }))
+{
+
+    @Html.TextBox("filter", null, new { @class = "form-control", placeholder = "Ingrese Nombre" }) 
+    @*<li> @Html.DropDownList("genre_filter", new List<SelectListItem>(), "Filtro generos", new { @class = "form-control" }) </li>*@
+    <input type="submit" name="btn_buscar" class="btn btn-primary" value="Buscar" />
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Plot)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CoverLink)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Runtime)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReleaseDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Plot)
+        </td>
+        <td>
+            <img style=" width: 200px" src="@item.CoverLink" alt="Alternate Text" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Runtime)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id }) |
+            @Html.ActionLink("Add Genre", "AddGenre", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

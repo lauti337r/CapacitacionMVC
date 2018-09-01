@@ -1,0 +1,26 @@
+﻿@model CapacitacionMVC.Web.Models.GenreToMovieViewModel
+
+@{
+    ViewBag.Title = "Add Genre";
+}
+
+<h2>Add Genre to @Model.movieName</h2>
+
+@using (Html.BeginForm("addGenreToMovie", "Movie")) { 
+    @Html.HiddenFor(model => model.movieID)
+    @Model.movieID
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.ListBox("genreToAdd", Model.genreList)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
